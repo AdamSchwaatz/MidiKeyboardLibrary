@@ -35,7 +35,7 @@ void Key::calculateVelocity(){
     if(diff > 65){
         velocity = 5;
     }else{
-        velocity = map(diff,3,65,127,5);
+        velocity = map(diff,4,70,127,5);
         if(velocity > 127) velocity = 127;
     }
 }

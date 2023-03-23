@@ -1,7 +1,7 @@
-
-typedef unsigned char byte;
+#include "Arduino.h"
+//typedef unsigned char byte;
 typedef enum{IDLE,PRESSED,RELEASED} KeyState;
-typedef unsigned int uint;
+//typedef unsigned int uint;
 
 class Key{
 public:
@@ -9,8 +9,8 @@ public:
     int kcode;
     KeyState kstate;
     bool stateChanged;
-    uint firstTime;
-    uint secondTime;
+    unsigned int firstTime;
+    unsigned int secondTime;
     int diff;
     byte velocity;
 
