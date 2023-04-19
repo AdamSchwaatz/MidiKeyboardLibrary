@@ -575,7 +575,7 @@ uint8_t I2C::start()
     }
        
   }
-  if ((TWI_STATUS == START) || (TWI_STATUS == REPEATED_START))
+  if ((TWI_STATUS == STARTS) || (TWI_STATUS == REPEATED_START))
   {
     return(0);
   }

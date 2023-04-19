@@ -65,7 +65,7 @@
 #define I2C_h
 
 
-#define START           0x08
+#define STARTS           0x08
 #define REPEATED_START  0x10
 #define MT_SLA_ACK	0x18
 #define MT_SLA_NACK	0x20
