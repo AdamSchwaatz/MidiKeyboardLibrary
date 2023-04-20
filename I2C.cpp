@@ -264,28 +264,33 @@ uint8_t I2C::write(int address, int registerAddress)
 
 uint8_t I2C::write(uint8_t address, uint8_t registerAddress, uint8_t data)
 {
+  Serial.println("in write");
   returnStatus = 0;
   returnStatus = start(); 
   if(returnStatus){return(returnStatus);}
   returnStatus = sendAddress(SLA_W(address));
+  Serial.println("check address");
   if(returnStatus)
   {
     if(returnStatus == 1){return(2);}
     return(returnStatus);
   }
   returnStatus = sendByte(registerAddress);
+  Serial.println("sent address");
   if(returnStatus)
   {
     if(returnStatus == 1){return(3);}
     return(returnStatus);
   }
   returnStatus = sendByte(data);
+  Serial.println("sent byte");
   if(returnStatus)
   {
     if(returnStatus == 1){return(3);}
     return(returnStatus);
   }
   returnStatus = stop();
+  Serial.println("Stopped");
   if(returnStatus)
   {
     if(returnStatus == 1){return(7);}
@@ -684,10 +689,13 @@ uint8_t I2C::receiveByte(uint8_t ack)
 
 uint8_t I2C::stop()
 {
+  Serial.println("in stop");
   unsigned long startingTime = millis();
   TWCR = (1<<TWINT)|(1<<TWEN)| (1<<TWSTO);
+  
   while ((TWCR & (1<<TWSTO)))
   {
+    Serial.println("in loop");
     if(!timeOutDelay){continue;}
     if((millis() - startingTime) >= timeOutDelay)
     {
