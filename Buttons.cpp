@@ -9,7 +9,7 @@
 
 Buttons::Buttons(uint8_t pin)
 :  _pin(pin)
-,  _delay(500)
+,  _delay(50)
 ,  _state(HIGH)
 ,  _ignore_until(0)
 ,  _has_changed(false)

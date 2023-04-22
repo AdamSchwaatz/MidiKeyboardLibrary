@@ -266,7 +266,8 @@ uint8_t I2C::write(uint8_t address, uint8_t registerAddress, uint8_t data)
 {
   //Serial.println("in write");
   returnStatus = 0;
-  returnStatus = start(); 
+  returnStatus = start();
+  //Serial.println("started"); 
   if(returnStatus){return(returnStatus);}
   returnStatus = sendAddress(SLA_W(address));
   //Serial.println("check address");
@@ -572,7 +573,11 @@ uint8_t I2C::start()
   TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
   while (!(TWCR & (1<<TWINT)))
   {
-    if(!timeOutDelay){continue;}
+    //Serial.println("stuck here?");
+    if(!timeOutDelay){
+      continue;
+      //break;
+      }
     if((millis() - startingTime) >= timeOutDelay)
     {
       lockUp();
@@ -600,7 +605,11 @@ uint8_t I2C::sendAddress(uint8_t i2cAddress)
   TWCR = (1<<TWINT) | (1<<TWEN);
   while (!(TWCR & (1<<TWINT)))
   {
-    if(!timeOutDelay){continue;}
+    //Serial.println("stuck here?2");
+    if(!timeOutDelay){
+      continue;
+      //break;
+      }
     if((millis() - startingTime) >= timeOutDelay)
     {
       lockUp();
@@ -627,12 +636,17 @@ uint8_t I2C::sendAddress(uint8_t i2cAddress)
 
 uint8_t I2C::sendByte(uint8_t i2cData)
 {
+  //Serial.println("in send byte");
   TWDR = i2cData;
   unsigned long startingTime = millis();
   TWCR = (1<<TWINT) | (1<<TWEN);
   while (!(TWCR & (1<<TWINT)))
   {
-    if(!timeOutDelay){continue;}
+    //Serial.println("stuck here?3");
+    if(!timeOutDelay){
+      continue;
+      //break;
+      }
     if((millis() - startingTime) >= timeOutDelay)
     {
       lockUp();
@@ -640,6 +654,7 @@ uint8_t I2C::sendByte(uint8_t i2cData)
     }
        
   }
+  //Serial.println("Finishing send byte");
   if (TWI_STATUS == MT_DATA_ACK)
   {
     return(0);
@@ -671,7 +686,11 @@ uint8_t I2C::receiveByte(uint8_t ack)
   }
   while (!(TWCR & (1<<TWINT)))
   {
-    if(!timeOutDelay){continue;}
+    //Serial.println("stuck here?4");
+    if(!timeOutDelay){
+      continue;
+      //break;
+      }
     if((millis() - startingTime) >= timeOutDelay)
     {
       lockUp();
@@ -697,7 +716,10 @@ uint8_t I2C::stop()
   while ((TWCR & (1<<TWSTO)))
   {
     //Serial.println("in loop");
-    if(!timeOutDelay){continue;}
+    if(!timeOutDelay){
+      //continue;
+      return(0);
+    }
     if((millis() - startingTime) >= timeOutDelay)
     {
       //Serial.println((millis() - startingTime));
