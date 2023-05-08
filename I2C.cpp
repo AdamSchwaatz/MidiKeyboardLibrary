@@ -574,15 +574,15 @@ uint8_t I2C::start()
   while (!(TWCR & (1<<TWINT)))
   {
     //Serial.println("stuck here?");
-    if(!timeOutDelay){
-      continue;
-      //break;
-      }
-    if((millis() - startingTime) >= timeOutDelay)
-    {
-      lockUp();
-      return(1);
-    }
+    // if(!timeOutDelay){
+    //   continue;
+    //   //break;
+    //   }
+    // if((millis() - startingTime) >= timeOutDelay)
+    // {
+    //   lockUp();
+    //   return(1);
+    // }
        
   }
   if ((TWI_STATUS == STARTS) || (TWI_STATUS == REPEATED_START))
@@ -606,15 +606,15 @@ uint8_t I2C::sendAddress(uint8_t i2cAddress)
   while (!(TWCR & (1<<TWINT)))
   {
     //Serial.println("stuck here?2");
-    if(!timeOutDelay){
-      continue;
-      //break;
-      }
-    if((millis() - startingTime) >= timeOutDelay)
-    {
-      lockUp();
-      return(1);
-    }
+    // if(!timeOutDelay){
+    //   continue;
+    //   //break;
+    //   }
+    // if((millis() - startingTime) >= timeOutDelay)
+    // {
+    //   lockUp();
+    //   return(1);
+    // }
        
   }
   if ((TWI_STATUS == MT_SLA_ACK) || (TWI_STATUS == MR_SLA_ACK))
@@ -643,15 +643,15 @@ uint8_t I2C::sendByte(uint8_t i2cData)
   while (!(TWCR & (1<<TWINT)))
   {
     //Serial.println("stuck here?3");
-    if(!timeOutDelay){
-      continue;
-      //break;
-      }
-    if((millis() - startingTime) >= timeOutDelay)
-    {
-      lockUp();
-      return(1);
-    }
+    // if(!timeOutDelay){
+    //   continue;
+    //   //break;
+    //   }
+    // if((millis() - startingTime) >= timeOutDelay)
+    // {
+    //   lockUp();
+    //   return(1);
+    // }
        
   }
   //Serial.println("Finishing send byte");
@@ -687,15 +687,15 @@ uint8_t I2C::receiveByte(uint8_t ack)
   while (!(TWCR & (1<<TWINT)))
   {
     //Serial.println("stuck here?4");
-    if(!timeOutDelay){
-      continue;
-      //break;
-      }
-    if((millis() - startingTime) >= timeOutDelay)
-    {
-      lockUp();
-      return(1);
-    }
+    // if(!timeOutDelay){
+    //   continue;
+    //   //break;
+    //   }
+    // if((millis() - startingTime) >= timeOutDelay)
+    // {
+    //   lockUp();
+    //   return(1);
+    // }
   }
   if (TWI_STATUS == LOST_ARBTRTN)
   {
